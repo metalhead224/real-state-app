@@ -45,7 +45,7 @@ const Profile = () => {
 
       }
       toast.success("Profile details updated!");
-      
+
     } catch (error) {
       toast.error("Could not update profile details!");
     }
