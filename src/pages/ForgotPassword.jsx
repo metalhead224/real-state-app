@@ -5,29 +5,29 @@ import { toast } from "react-toastify";
 import OAuth from "../components/OAuth";
 
 const ForgotPassword = () => {
-
-  const [email, setEmail] = useState('');
-
+  const [email, setEmail] = useState("");
 
   function onChange(e) {
     setEmail(e.target.value);
   }
 
-  async function onSubmit (e) {
+  async function onSubmit(e) {
     e.preventDefault();
 
     try {
       const auth = getAuth();
       await sendPasswordResetEmail(auth, email);
-      toast.success("Email was sent successfully!"); 
+      toast.success("Email was sent successfully!");
     } catch (error) {
-      toast.error("Could not send reset password")
+      toast.error("Could not send reset password");
     }
   }
 
   return (
     <section>
-      <h1 className="text-3xl text-center mt-6 font-bold mb-0">Forgot Password</h1>
+      <h1 className="text-3xl text-center mt-6 font-bold mb-0">
+        Forgot Password
+      </h1>
       <div className="flex justify-center flex-wrap items-center px-6 py-12 max-w-4xl mx-auto">
         <div className="md:w-[67%] lg:w-[50%] mb-12 md:mb-6">
           <img
@@ -38,7 +38,7 @@ const ForgotPassword = () => {
         </div>
         <div className="w-full md:w-[67%] lg:w-[40%] lg:ml-20">
           <form
-          onSubmit={onSubmit}
+            onSubmit={onSubmit}
             style={{
               display: "flex",
               flexDirection: "column",

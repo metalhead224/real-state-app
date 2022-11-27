@@ -3,7 +3,9 @@ import { updateDoc, doc } from "firebase/firestore";
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
-import { db } from "../firebase"
+import { db } from "../firebase";
+import { FcHome } from "react-icons/fc";
+import { Link } from "react-router-dom";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -30,8 +32,8 @@ const Profile = () => {
 
   async function onSubmit(e) {
     try {
-      if(auth.currentUser.displayName !== name){
-         //update display name in firebase auth
+      if (auth.currentUser.displayName !== name) {
+        //update display name in firebase auth
         await updateProfile(auth.currentUser, {
           displayName: name,
         });
@@ -41,11 +43,9 @@ const Profile = () => {
         const docRef = doc(db, "users", auth.currentUser.uid);
         await updateDoc(docRef, {
           name,
-        })
-
+        });
       }
       toast.success("Profile details updated!");
-
     } catch (error) {
       toast.error("Could not update profile details!");
     }
@@ -65,7 +65,9 @@ const Profile = () => {
               disabled={!changeDetail}
               onChange={onChange}
               className={`w-full px-4 py-2 text-xl
-            text-gray-700 bg-white border border-gray-300 rounded transition ease-in-out mb-6 ${changeDetail && "bg-red-200 focus:bg-red-200"}`}
+            text-gray-700 bg-white border border-gray-300 rounded transition ease-in-out mb-6 ${
+              changeDetail && "bg-red-200 focus:bg-red-200"
+            }`}
             />
 
             {/* email input */}
@@ -99,6 +101,16 @@ const Profile = () => {
               </p>
             </div>
           </form>
+
+          <button 
+          type="submit" 
+          className="w-full bg-blue-600 text-white uppercase px-7 py-3 text-sm font-medium rounded shadow-md 
+          hover:bg-blue-700 transition duration-200 ease-in-out hover:shadow-lg active:bg-blue-800">
+            <Link to="/create-listing" className="flex justify-center items-center gap-2">
+              <FcHome className="text-3xl bg-red-200 rounded-full p-1 border-2"/>
+              sell or rent your rooms
+            </Link>
+          </button>
         </div>
       </section>
     </>
